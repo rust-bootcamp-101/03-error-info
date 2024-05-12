@@ -1,0 +1,9 @@
+[workspace]
+resolver = "2"
+members = [
+    "error-code", "error-code-derive",
+]
+
+[workspace.dependencies]
+error-code ={ path = "../error-code"}
+error-code-derive ={ path = "../error-code-derive"}
