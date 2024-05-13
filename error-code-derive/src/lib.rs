@@ -1,14 +1,11 @@
-pub fn add(left: usize, right: usize) -> usize {
-    left + right
-}
+mod error_info;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use error_info::process_error_info;
+use proc_macro::TokenStream;
+use syn::{parse_macro_input, DeriveInput};
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[proc_macro_derive(ToErrorInfo, attributes(error_info))]
+pub fn derive_to_error_info(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    process_error_info(input).into()
 }
